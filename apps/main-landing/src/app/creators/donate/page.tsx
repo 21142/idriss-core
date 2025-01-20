@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
+import { type Metadata } from 'next';
+
 import { Button } from '@idriss-xyz/ui/button';
 import { CREATORS_LINK } from '@idriss-xyz/constants';
 
@@ -9,14 +11,13 @@ import { RainbowKitProviders } from './providers';
 import { Content } from './content';
 
 import '@rainbow-me/rainbowkit/styles.css';
-import { type Metadata } from 'next';
 
-export async function generateMetadata({
+export function generateMetadata({
   searchParams,
 }: {
   searchParams: URLSearchParams;
-}): Promise<Metadata> {
-  const creatorName = searchParams.get('creatorName') || 'Creator';
+}): Metadata {
+  const creatorName = searchParams.get('creatorName') ?? 'Creator';
 
   return {
     title: `Support ${creatorName} | IDRISS`,
