@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { type Metadata } from 'next';
-
 import { Button } from '@idriss-xyz/ui/button';
 import { CREATORS_LINK } from '@idriss-xyz/constants';
 
