@@ -9,6 +9,33 @@ import { RainbowKitProviders } from './providers';
 import { Content } from './content';
 
 import '@rainbow-me/rainbowkit/styles.css';
+import { type Metadata } from 'next';
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: URLSearchParams;
+}): Promise<Metadata> {
+  const creatorName = searchParams.get('creatorName') || 'Creator';
+
+  return {
+    title: `Support ${creatorName} | IDRISS`,
+    openGraph: {
+      title: `Support ${creatorName}`,
+      description: `Support ${creatorName} in their creative journey! Donate using crypto easily and securely.`,
+      url: `https://idriss-core.vercel.app/creators/donate?creatorName=${creatorName}`,
+      siteName: 'IDRISS',
+      images: [
+        {
+          url: 'https://idriss-core.vercel.app/og.png',
+          width: 1200,
+          height: 630,
+          alt: `${creatorName}'s donation page`,
+        },
+      ],
+    },
+  };
+}
 
 // ts-unused-exports:disable-next-line
 export default function Donors() {
