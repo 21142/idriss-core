@@ -11,11 +11,12 @@ import { Content } from './content';
 
 import '@rainbow-me/rainbowkit/styles.css';
 
-export function generateMetadata({
+/* eslint-disable @typescript-eslint/require-await */
+export async function generateMetadata({
   searchParams,
 }: {
   searchParams: URLSearchParams;
-}): Metadata {
+}): Promise<Metadata> {
   const creatorName = searchParams.get('creatorName') ?? 'Creator';
 
   return {
