@@ -13,11 +13,14 @@ import '@rainbow-me/rainbowkit/styles.css';
 
 /* eslint-disable @typescript-eslint/require-await */
 export async function generateMetadata({
+  params,
   searchParams,
 }: {
+  params: { creatorName: string };
   searchParams: URLSearchParams;
 }): Promise<Metadata> {
-  const creatorName = searchParams.get('creatorName') ?? 'Creator';
+  const creatorName =
+    searchParams.get('creatorName') ?? params.creatorName ?? 'Creator';
 
   return {
     title: `Support ${creatorName} | IDRISS`,
