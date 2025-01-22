@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { type Metadata } from 'next';
 import { Button } from '@idriss-xyz/ui/button';
 import { CREATORS_LINK } from '@idriss-xyz/constants';
 
@@ -10,39 +9,45 @@ import { RainbowKitProviders } from './providers';
 import { Content } from './content';
 
 import '@rainbow-me/rainbowkit/styles.css';
+import { Metadata } from 'next';
+import DonorsClient from './components/donors-client';
 
-/* eslint-disable @typescript-eslint/require-await */
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
 export async function generateMetadata({
-  params,
   searchParams,
-}: {
-  params: { creatorName: string };
-  searchParams: URLSearchParams;
-}): Promise<Metadata> {
-  const creatorName =
-    searchParams.get('creatorName') ?? params.creatorName ?? 'Creator';
+}: Props): Promise<Metadata> {
+  const creatorName = searchParams.creatorName as string;
 
   return {
-    title: `Support ${creatorName} | IDRISS`,
+    title: `Donate to ${creatorName} on Idriss`,
+    description: `Support ${creatorName} by donating through Idriss.`,
     openGraph: {
-      title: `Support ${creatorName}`,
-      description: `Support ${creatorName} in their creative journey! Donate using crypto easily and securely.`,
-      url: `https://idriss-core.vercel.app/creators/donate?creatorName=${creatorName}`,
-      siteName: 'IDRISS',
+      title: `Donate to ${creatorName} on Idriss`,
+      description: `Support ${creatorName} by donating through Idriss.`,
       images: [
         {
-          url: 'https://idriss-core.vercel.app/og.png',
+          url: `https://www.idriss.xyz/api/og?creatorName=${encodeURIComponent(creatorName)}`,
           width: 1200,
           height: 630,
-          alt: `${creatorName}'s donation page`,
         },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Donate to ${creatorName} on Idriss`,
+      description: `Support ${creatorName} by donating through Idriss.`,
+      images: [
+        `https://www.idriss.xyz/api/og?creatorName=${encodeURIComponent(creatorName)}`,
       ],
     },
   };
 }
 
 // ts-unused-exports:disable-next-line
-export default function Donors() {
+export default function Donors({ searchParams }: Props) {
   return (
     <RainbowKitProviders>
       <TopBar />
@@ -53,6 +58,8 @@ export default function Donors() {
           className="pointer-events-none absolute top-0 hidden h-full opacity-40 lg:block"
           alt=""
         />
+
+        <DonorsClient />
 
         <Content className="container mt-8 lg:mt-[130px] lg:[@media(max-height:800px)]:mt-[60px]" />
         <Button
