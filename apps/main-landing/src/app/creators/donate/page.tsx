@@ -16,9 +16,14 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+type PageProps = {
+  params: { [key: string]: string }; // For dynamic route parameters
+  searchParams: { [key: string]: string | string[] | undefined }; // For query parameters
+};
+
 export async function generateMetadata({
   searchParams,
-}: Props): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const creatorName = searchParams.creatorName as string;
 
   return {
@@ -47,7 +52,7 @@ export async function generateMetadata({
 }
 
 // ts-unused-exports:disable-next-line
-export default function Donors({ searchParams }: Props) {
+export default function Donors({ PageProps }: Props) {
   return (
     <RainbowKitProviders>
       <TopBar />
