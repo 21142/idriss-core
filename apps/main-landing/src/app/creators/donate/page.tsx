@@ -12,23 +12,24 @@ import '@rainbow-me/rainbowkit/styles.css';
 
 type Properties = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params: Promise<any>; // For dynamic route parameters
-  searchParams: Promise<Record<string, string | string[] | undefined>>; // For query parameters (as a Promise)
+  params: Promise<any>;
+  // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export async function generateMetadata({
   searchParams,
 }: Properties): Promise<Metadata> {
-  const resolvedSearchParameters = await searchParams;
+  const resolvedSearchParameters = await searchParams; // Await the Promise
   const creatorName = resolvedSearchParameters.creatorName as string;
 
   return {
-    title: `Donate to ${creatorName} on Idriss`,
-    description: `Support ${creatorName} by donating through Idriss.`,
+    title: `Donate to ${creatorName} with IDRISS`,
+    description: `Support ${creatorName} by donating through IDRISS.`,
     openGraph: {
-      title: `Donate to ${creatorName} on Idriss`,
-      description: `Support ${creatorName} by donating through Idriss.`,
+      title: `Donate to ${creatorName} with IDRISS`,
+      description: `Support ${creatorName} by donating through IDRISS.`,
       images: [
         {
           url: `https://idriss-core-git-feat-creators-metadata-21142s-projects.vercel.app/api/og?creatorName=${encodeURIComponent(creatorName)}`,
@@ -39,8 +40,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `Donate to ${creatorName} on Idriss`,
-      description: `Support ${creatorName} by donating through Idriss.`,
+      title: `Donate to ${creatorName} with IDRISS`,
+      description: `Support ${creatorName} by donating through IDRISS.`,
       images: [
         `https://idriss-core-git-feat-creators-metadata-21142s-projects.vercel.app/api/og?creatorName=${encodeURIComponent(creatorName)}`,
       ],

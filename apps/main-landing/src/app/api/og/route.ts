@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
             alignItems: 'center',
          },
       },
-      `Donate to ${creatorName} on Idriss`,
+      `Donate to ${creatorName} with IDRISS`,
    );
 
    return new ImageResponse(element, {
