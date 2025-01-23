@@ -4,8 +4,9 @@ import { createElement } from 'react';
 
 export const runtime = 'edge';
 
-export async function GET(req: NextRequest) {
-   const { searchParams } = req.nextUrl;
+// eslint-disable-next-line @typescript-eslint/require-await
+export async function GET(request: NextRequest) {
+   const { searchParams } = request.nextUrl;
    const creatorName = searchParams.get('creatorName');
 
    const element = createElement(
