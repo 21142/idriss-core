@@ -25,9 +25,6 @@ export async function GET(request: NextRequest) {
    const { searchParams } = request.nextUrl;
    const creatorName = searchParams.get('creatorName');
 
-   const baseUrl = request.nextUrl.origin;
-   const imageUrl = `${baseUrl}/og.png`;
-
    const element = createElement(
       'div',
       {
@@ -38,7 +35,7 @@ export async function GET(request: NextRequest) {
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
-            backgroundImage: `url(${imageUrl})`,
+            backgroundImage: 'url(https://idriss.xyz/og.png)',
             backgroundRepeat: 'no-repeat',
             fontSize: 100,
             letterSpacing: -2,
