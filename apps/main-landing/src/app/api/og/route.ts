@@ -5,17 +5,19 @@ import { createElement } from 'react';
 // eslint-disable-next-line @typescript-eslint/require-await
 async function loadGoogleFont(font: string, text: string) {
    const url = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(text)}`
-   const css = await (await fetch(url)).text()
-   const resource = css.match(/src: url\((.+)\) format\('(opentype|truetype)'\)/)
+   const response = await fetch(url);
+   const css = await response.text();
+   const regex = /src: url\((.+)\) format\('(opentype|truetype)'\)/;
+   const resource = regex.exec(css);
 
    if (resource) {
-      const response = await fetch(resource[1]!)
-      if (response.status == 200) {
-         return await response.arrayBuffer()
+      const fontResponse = await fetch(resource[1]!);
+      if (fontResponse.status == 200) {
+         return await fontResponse.arrayBuffer();
       }
    }
 
-   throw new Error('failed to load font data')
+   throw new Error('failed to load font data');
 }
 
 // eslint-disable-next-line @typescript-eslint/require-await
